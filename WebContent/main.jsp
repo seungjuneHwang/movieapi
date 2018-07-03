@@ -10,8 +10,15 @@
 <h1> 영화 검색 사이트 </h1>
 <h3>검색할 영화를 입력 하세요.</h3>
 <form action="nmovie">
-	<input type="text" name="search.jsp">
+	<input type="text" name="search">
 	<input type="submit" value="검색">
 </form>
+<h1> 뉴스 검색 사이트 </h1>
+<h3>검색할 뉴스를 입력 하세요.</h3>
+<form action="search2.jsp">
+	<input type="text" name="search">
+	<input type="submit" value="검색">
+</form>
+
 </body>
 </html>

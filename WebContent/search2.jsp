@@ -29,10 +29,10 @@
        // html 에서 찍을 문자열 변수
        String jsonStr = null;
        // 임시 고정 값
-       search = "토이스토리";
+//        search = "토이스토리";
        try {
            String text = URLEncoder.encode(search, "UTF-8");
-           String apiURL = "https://openapi.naver.com/v1/search/movie.json?query="+ text; // json 결과
+           String apiURL = "https://openapi.naver.com/v1/search/news.json?query="+ text; // json 결과
            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
            URL url = new URL(apiURL);
            HttpURLConnection con = (HttpURLConnection)url.openConnection();
