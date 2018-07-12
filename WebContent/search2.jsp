@@ -1,3 +1,4 @@
+<%@page import="com.test.vo.NNewsVO"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.google.gson.JsonParser"%>
@@ -29,7 +30,10 @@
        // html 에서 찍을 문자열 변수
        String jsonStr = null;
        // 임시 고정 값
-//        search = "토이스토리";
+       if (search == null || search == "") {
+    	   search = "러시아 월드컵";    	   
+       }
+
        try {
            String text = URLEncoder.encode(search, "UTF-8");
            String apiURL = "https://openapi.naver.com/v1/search/news.json?query="+ text; // json 결과
@@ -55,7 +59,8 @@
 //            System.out.println(resp.toString());
 //            jsonStr = resp.toString();
 			response.setCharacterEncoding("utf-8");
-			response.setContentType("application/json; charset=UTF-8");
+// 			response.setContentType("application/json; charset=UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 			
 		
 			resp.setLength(resp.length()-1);
@@ -63,25 +68,26 @@
 			resp.delete(0, end-1);
 // 			out.println(resp.toString());
 			String json = resp.toString();
+// 			out.print(json);	
+		
 			
 			Gson gson = new Gson();
 			// 이거 써도 되고
-// 			MovieVO[] arr = gson.fromJson(json, MovieVO[].class);
-// 			List<MovieVO> mcList = Arrays.asList(arr);
+			NNewsVO[] arr = gson.fromJson(json, NNewsVO[].class);
+			List<NNewsVO> mcList = Arrays.asList(arr);
 
 			// 이거 써도 되고
-			TypeToken<List<MovieVO>> token = new TypeToken<List<MovieVO>>() {};
-			List<MovieVO> mcList = gson.fromJson(json, token.getType());
-			
-			for (MovieVO vo : mcList) {
-				System.out.println(vo.getTitle());
-				System.out.println(vo.getImage());
-				System.out.println(vo.getLink());
-			}
-	
-			
+// 			TypeToken<List<MovieVO>> token = new TypeToken<List<MovieVO>>() {};
+// 			List<MovieVO> mcList = gson.fromJson(json, token.getType());
+
+			for (NNewsVO vo : mcList) {%>
+				<a href="<%=vo.getLink() %>"><%=vo.getTitle() %></a>
+				<br>
+				<%=vo.getDescription() %>
+				<br>
+			<%}
+
        } catch (Exception e) {
            System.out.println(e);
        }
-
 %>
